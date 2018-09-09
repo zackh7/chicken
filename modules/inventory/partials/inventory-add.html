@@ -1,0 +1,41 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/inventory">Product</a></li>
+    <li class="active">New Product</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>New Product</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" id="im_name" class="form-control" ng-model="inventory.im_name">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Unit Name</label>
+                                    <input type="text" id="im_um_id" class="form-control" ng-model="inventory.im_um_id" placeholder="Select unit name" typeahead="state as state.um_name for state in unitList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="addInventory()">Save Product</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

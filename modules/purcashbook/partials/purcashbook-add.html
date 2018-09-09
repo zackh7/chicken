@@ -1,0 +1,100 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/purcashbook">Purchase Cashbook</a></li>
+    <li class="active">New Purchase Cashbook</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>New Purchase Cashbook</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Dealer Name</label>
+                                    <input type="text" id="pcm_dm_id" ng-model="purcashbook.pcm_dm_id" typeahead="state as state.dm_search for state in dealerList | filter:$viewValue | limitTo:8" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Debit</label>
+                                    <label class="form-control">{{purcashbook.pcm_dm_id.dm_debit}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Credit</label>
+                                    <label class="form-control">{{purcashbook.pcm_dm_id.dm_credit}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Date</label>
+                                    <input type="text" id="pcm_date" class="form-control" ng-model="purcashbook.pcm_date" readonly="readonly">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Received by</label>
+                                    <input type="text" id="pcm_received_by" class="form-control" ng-model="purcashbook.pcm_received_by">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Comment</label>
+                                    <input type="text" id="pcm_comment" class="form-control" ng-model="purcashbook.pcm_comment">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Payment Mode</label>
+                                    <select class="form-control" id="pcm_payment_mode" ng-model="purcashbook.pcm_payment_mode" ng-change="chequeShow()">
+                                        <option value="" >Select Payment Mode</option>
+                                        <option >Cash</option>
+                                        <option >Cheque</option>
+                                        <option >Card</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Amount</label>
+                                    <input type="text" id="pcm_amount" class="form-control keyboard-num" ng-model="purcashbook.pcm_amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="cheq">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="name">Cheque Number</label>
+                                        <input type="text" id="pcm_cheque_no" class="form-control keyboard-num" ng-model="purcashbook.pcm_cheque_no">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="name">Cheque Date</label>
+                                        <input type="text" id="pcm_cheque_date" class="form-control" ng-model="purcashbook.pcm_cheque_date" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="addPurcashbook()">Save Purchase Cashbook</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

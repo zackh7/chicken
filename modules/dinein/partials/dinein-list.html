@@ -1,0 +1,103 @@
+<style type="text/css">
+   .color{
+      background-color: white;
+   }
+</style>
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0">
+    <li><a href="#/">Home</a></li>
+    <li class="active">Dine In</li>
+</ol>
+
+<div class="span12" align="center" v-align="bottom" ng-hide="loading1 == 1" style="margin: auto; height:400px;">
+    <img src="resources/assets/img/reload.gif" style="margin-top: 50px; height: 200px;width: 250px;">
+</div>
+<div class="container-fluid" ng-show="loading1 == 1">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Dine In</strong>
+                        <small>Form</small>
+                    </div>
+                    <!-- /.row -->
+                     <div class="card-block">
+                        <div class="row">
+                           <div class="col-lg-12">
+                              <div class="col-lg-2" ng-repeat="table in tableList | filter : table"><br>
+                                 <button ng-click="getid(table);" id="{{table.tm_id}}" style="border-radius: 5px;" class="color" ng-if="table.tm_isreserved == 0">
+                                    <img ng-if="table.tm_size == '2 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t2.png">
+                                    <img ng-if="table.tm_size == '4 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t4.png">
+                                    <img ng-if="table.tm_size == '6 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t6.png">
+                                    <div>{{table.tm_description}} ({{table.am_name}})</div>
+                                 </button>
+                                 <button ng-click="getid(table);" id="{{table.tm_id}}" style="border-radius: 5px;" class="btn-success" ng-if="table.tm_isreserved == 1">
+                                    <img ng-if="table.tm_size == '2 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t2.png">
+                                    <img ng-if="table.tm_size == '4 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t4.png">
+                                    <img ng-if="table.tm_size == '6 Seaters'" id="t2" height="80" width="80" src="resources/assets/img/t6.png">
+                                    <div>{{table.tm_description}} ({{table.am_name}})</div>
+                                 </button>
+                              </div>
+
+                           
+
+                           <!-- <div class="col-lg-4"><br>
+                              <div class="col-lg-12">
+                                 <div class="col-lg-2">
+                                    <div class="col-lg-12">
+                                       <div class="avail-seat" style="width: 30px;height: 20px; background-color: green; border: black solid 2px;">
+                                       </div>
+                                       <div class="col-lg-12">&nbsp;</div>
+                                    </div>                                    
+                                    <div class="col-lg-12"><div class="booked" style="width: 30px;height: 20px;background-color:white; border: black solid 2px;">
+
+                                       </div>
+                                          <div class="col-lg-12">&nbsp;</div>
+                                    </div>
+                                 </div>
+                                 <div class="col-lg-6">
+                                    <div class="row note">
+                                       <div class="col-md-12">
+                                          <p>Reserved Seat</p>
+                                       </div>
+                                       <div class="col-md-12">
+                                          <p style="margin-top: 4px;">Available Seat</p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                                 -->
+
+                          <div class="col-lg-2"><br>
+                                    <div class="row note">
+                                       <div class="col-md-12" style="margin-top: 10px;">
+                                          <button class="avail-seat" style="width: 30px;height: 20px; background-color: green; border: black solid 2px;">
+                                       </button> Reserved Seat
+                                       </div>
+                                       <div class="col-md-12" style="margin-top: 10px;">
+                                          <button class="booked" style="width: 30px;height: 20px;background-color:white; border: black solid 2px;">
+
+                                       </button> Available Seat 
+                                       </div>
+                                    </div>
+                           </div>
+                                
+
+                            </div>
+                               <!-- col-lg-12 -->
+                        </div>
+                            <!-- row -->
+                     </div>
+                        <!-- /card block-->
+                    <div class="card-footer">
+                    </div>                   
+                </div>
+                    <!-- /.card  -->
+            </div>
+                <!-- /col-lg-12 -->
+        </div>
+    </div>
+</div>
+

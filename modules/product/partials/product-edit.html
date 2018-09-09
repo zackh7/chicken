@@ -1,0 +1,60 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getCategoryList();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/product">Dishes</a></li>
+    <li class="active">Edit Dishes</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Dishes</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Category Name</label>
+                                    <input type="text" id="pm_ctm_id" class="form-control" ng-model="product.pm_ctm" placeholder="Select category name" typeahead="state as state.ctm_type for state in categoryList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Dishes Name</label>
+                                    <input type="text" id="pm_description" class="form-control" ng-model="product.pm_description"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Quantity</label>
+                                    <input type="text" id="pm_quantity" class="form-control keyboard-num" ng-model="product.pm_quantity"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Price</label>
+                                    <input type="text" id="pm_rate" class="form-control keyboard-num" ng-model="product.pm_rate"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Dish</label><br>
+                                    <img src="{{displayImages}}" onclick="document.getElementById('img-path').click(); return false; " id="app-file-btn" title="Click to add Photo" height="100" width="100">
+                                    <input  type="file" 3d="img-path" name="file" id="profilePhotoFileUpload" placeholder="" ng-file-select="onFileSelect($files)" accept="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/product'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editProduct()">Update Dishes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

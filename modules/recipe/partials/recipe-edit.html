@@ -1,0 +1,47 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getProductList();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/recipe">Recipe</a></li>
+    <li class="active">Edit Recipe</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Recipe</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Dishes Name</label>
+                                    <input type="text" id="rm_pm_id" class="form-control" ng-model="recipe.rm_pm" placeholder="Select dishes name" typeahead="state as state.pm_search for state in productList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" id="rm_im_id" class="form-control" ng-model="recipe.rm_im" placeholder="Select product name" typeahead="state as state.im_search for state in inventoryList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Quantity</label>
+                                    <input type="text" id="rm_quantity" class="form-control keyboard-num" ng-model="recipe.rm_quantity"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/recipe'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editRecipe()">Update Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getUnit();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/unit">Unit</a></li>
+    <li class="active">Edit Unit</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Unit</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Unit Name</label>
+                                    <input type="text" id="um_name" class="form-control" ng-model="unit.um_name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/unit'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editUnit()">Update Unit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

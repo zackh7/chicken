@@ -1,0 +1,35 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getArea();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/category">Table Area</a></li>
+    <li class="active">Edit Table Area</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Table Area</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Table Area Name</label>
+                                    <input type="text" id="am_name" class="form-control" ng-model="area.am_name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/area'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editArea()">Update Table Area</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

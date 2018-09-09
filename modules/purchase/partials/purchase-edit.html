@@ -1,0 +1,186 @@
+<style>
+ .printshow{display:none;}
+</style>
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getDealerList();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/purchase">Purchase</a></li>
+    <li class="active">Edit Purchase</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Purchase</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Invoice no</label>
+                                    <input type="text" id="prm_invoice_no" class="form-control" ng-model="purchase.prm_invoice_no" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Date</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input type="text" class="form-control" id="prm_date" ng-model="purchase.prm_date" readonly="readonly">
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="name">Cash/Credit</label>
+                                    <select id="invoiceType" class="form-control" size="1" ng-change="creditShow()" ng-model="purchase.prm_credit">
+                                        <option value="">Select credit / cash</option>
+                                        <option>credit</option>
+                                        <option>cash</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group" id="paymentdate">
+                                    <label for="name">Payment Date</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" class="form-control" id="prm_payment_date" ng-model="purchase.prm_payment_date" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Dealer Name</label>
+                                    <input type="text" id="prm_dm_id" class="form-control" ng-model="purchase.prm_dm" placeholder="Select dealer name" typeahead="state as state.dm_search for state in dealerList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Comment</label>
+                                    <input type="text" id="prm_comment" class="form-control" ng-model="purchase.prm_comment"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="name">Select product</label>
+                                    <input type="text" id="ppm_im_id" class="form-control" ng-model="productObj.im_search" placeholder="Select product name" typeahead="inventory as inventory.im_search for inventory in inventoryList | filter:$viewValue | limitTo:8"  typeahead-on-select="setItemDetails()"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name">Quantity</label>
+                                    <input type="number" id="ppm_qty" class="form-control keyboard-num" ng-model="productObj.ppm_qty"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name">Price</label>
+                                    <input type="text" id="ppm_rate" class="form-control keyboard-num" ng-model="productObj.ppm_rate"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="name">Total</label>
+                                    <label class="form-control" ng-if="productObj.ppm_rate == undefined">0</label>
+                                    <label class="form-control" ng-if="productObj.ppm_rate != undefined">{{productObj.ppm_qty * productObj.ppm_rate}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group"><br>
+                                    <button type="button" class="btn btn-md btn-primary pull-right" id="btnAddCart" ng-click="addToCart();"><i class="fa fa-plus-circle"></i> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table" border="1">
+                                    <thead>
+                                        <tr>      
+                                            <th>Sr. No.</th>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Net Amount</th>
+                                            <th class="action">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="content">
+                                        <tr ng-repeat="data in selectedProductList">
+                                            <td style="padding:4px 8px 4px 8px;">{{data.srno}}</td>
+                                            <td style="padding:4px 8px 4px 8px;">{{data.im_name}} ({{data.um_name}})</td>
+                                            <td style="padding:4px 8px 4px 8px;">
+                                                <span class="printshow">
+                                                {{data.ppm_qty}}
+                                                </span>
+                                                <span class="print-hide">
+                                                    <input type="number" class="form-control" ng-model="data.ppm_qty"  ng-change="calculateTotal()"/>
+                                                </span>
+                                            </td>
+                                            <td style="padding:4px 8px 4px 8px;">
+                                                <span class="printshow">
+                                                {{data.ppm_rate}}
+                                                </span>
+                                                <span class="print-hide">
+                                                    <input type="text" class="form-control" ng-model="data.ppm_rate" ng-change="calculateTotal()"/>
+                                                </span>
+                                            </td><q></q>
+                                            <td style="padding:4px 8px 4px 8px;">{{(parseFloat(data.ppm_qty) * parseFloat(data.ppm_rate)) | number:2}}</td> 
+                                            <td style="padding:4px 8px 4px 8px;" class="action">
+                                                <button  class="btn btn-md btn-danger" type="button" id="btnAddItemLine" ng-click="removeItem($index)"><i class="fa fa-minus-square"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-repeat="data in selectedProductListAdd">
+                                            <td style="padding:4px 8px 4px 8px;">{{data.srno}}</td>
+                                            <td style="padding:4px 8px 4px 8px;">{{data.im_search.im_search}}</td>
+                                            <td style="padding:4px 8px 4px 8px;">
+                                                <span class="printshow">
+                                                {{data.ppm_qty}}
+                                                </span>
+                                                <span class="print-hide">
+                                                    <input type="number" class="form-control" ng-model="data.ppm_qty"  ng-change="calculateTotal()"/>
+                                                </span>
+                                            </td>
+                                            <td style="padding:4px 8px 4px 8px;">
+                                                <span class="printshow">
+                                                {{data.ppm_rate}}
+                                                </span>
+                                                <span class="print-hide">
+                                                    <input type="text" class="form-control" ng-model="data.ppm_rate" ng-change="calculateTotal()"/>
+                                                </span>
+                                            </td><q></q>
+                                            <td style="padding:4px 8px 4px 8px;">{{(parseFloat(data.ppm_qty) * parseFloat(data.ppm_rate)) | number:2}}</td> 
+                                            <td style="padding:4px 8px 4px 8px;" class="action">
+                                                <button  class="btn btn-md btn-danger" type="button" id="btnAddItemLine" ng-click="removeItem1($index)"><i class="fa fa-minus-square"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-sm-offset-10">
+                                <div class="form-group">
+                                    <label for="name">Total</label>
+                                    <input type="text" id="prm_amount" class="form-control" ng-model="purchase.prm_amount" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/purchase'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editPurchase()">Update Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

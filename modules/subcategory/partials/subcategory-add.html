@@ -1,0 +1,42 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/subcategory">Sub Category</a></li>
+    <li class="active">New Sub Category</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>New Sub Category</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Dishes Name</label>
+                                    <input type="text" id="sctm_pm_id" class="form-control" ng-model="subcategory.sctm_pm_id" placeholder="Select dishes name" typeahead="state as state.pm_search for state in productList | filter:$viewValue | limitTo:8" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Sub Category Name</label>
+                                    <input type="text" id="sctm_type" class="form-control" ng-model="subcategory.sctm_type">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="addSubCategory()">Save Sub Category</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

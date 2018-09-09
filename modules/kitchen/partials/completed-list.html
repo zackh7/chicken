@@ -1,0 +1,48 @@
+<ol class="breadcrumb m-b-0" ng-init="getAll();">
+    <li><a href="#/">Home</a></li>
+    <li>Kitchen</li>
+    <li class="active">Completed-Order</li>
+</ol>
+
+<div class="span12" align="center" v-align="bottom" ng-hide="loading1 == 1" style="margin: auto; height:400px;">
+    <img src="resources/assets/img/reload.gif" style="margin-top: 50px; height: 200px;width: 250px;">
+</div>
+<div class="container-fluid" ng-show="loading1 == 1">
+    <div class="animated fadeIn">
+        <div class="row row-equal">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Completed Orders</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <table class="table table-bordered table-striped" id="checkrecord">
+                          <thead>
+                            <tr>
+                              <th>Order No</th>
+                              <th>Where</th>
+                              <th>Table</th>
+                              <th>Product</th>
+                              <th>Quantity</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="complete in completeList">
+                              <td>{{complete.om_no}}</td>
+                              <td>{{complete.om_where}}</td>
+                              <td>{{complete.tm_description}} ({{complete.am_name}})</td>
+                              <td>{{complete.pm_description}} {{complete.pm_quantity}}</td>
+                              <td>{{complete.opm_quantity}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <!--/col lg 12-->
+        </div>
+        <!--/row-->
+    </div>
+</div>

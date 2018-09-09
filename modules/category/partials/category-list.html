@@ -1,0 +1,78 @@
+<ol class="breadcrumb m-b-0" ng-init="getAll();">
+    <li><a href="#/">Home</a></li>
+    <li class="active">Category</li>
+</ol>
+
+<div class="span12" align="center" v-align="bottom" ng-hide="loading1 == 1" style="margin: auto; height:400px;">
+    <img src="resources/assets/img/reload.gif" style="margin-top: 50px; height: 200px;width: 250px;">
+</div>
+<div class="container-fluid" ng-show="loading1 == 1">
+    <div class="animated fadeIn">
+        <div class="row row-equal">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Category List</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search Here..."/><br>
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th>Category</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="category in filteredTodos | filter : category">
+                              <td>{{category.ctm_type}}</td>
+                              <td>
+                                <a class="btn btn-warning form-control" style="width: 100px;" href="#/category/edit/{{category.ctm_id}}"><i class="icon icon-pencil"></i> Edit</a>
+                                <button class="btn btn-danger form-control"  data-toggle="modal" data-target="#confirm-delete" ng-click="deleteCategory(category.ctm_id)" style="width: 100px;">
+                                  <i class="icon icon-trash"></i> Delete
+                                </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{categoryListcount}} Category's</span>
+                        <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0" style="float: right;margin-top: -27px;">
+                          <pagination  class="inline"
+                                  ng-model="currentPage"
+                                  total-items="categoryListcount"
+                                  max-size="maxSize"
+                                  boundary-links="true" data-num-pages="noOfPages"
+                                  items-per-page="numPerPage">
+                          </pagination>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--/col-->
+        </div>
+        <!--/row-->
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="confirm-delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

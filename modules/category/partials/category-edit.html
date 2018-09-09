@@ -1,0 +1,35 @@
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0" ng-init="getCategory();">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/category">Category</a></li>
+    <li class="active">Edit Category</li>
+</ol>
+
+<div class="container-fluid">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Edit Category</strong>
+                        <small>Form</small>
+                    </div>
+                    <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Category Name</label>
+                                    <input type="text" id="ctm_type" class="form-control" ng-model="category.ctm_type">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '#/category'" id="btncancel">Back</button>
+                        <button type="button" class="btn btn-sm btn-success" id="btnsave" ng-click="editCategory()">Update Category</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

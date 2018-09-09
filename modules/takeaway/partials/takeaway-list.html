@@ -1,0 +1,147 @@
+<style>
+.switch{
+  float: right;
+  margin-top: -15px;
+}
+.color{
+      background-color: white;
+}
+</style>
+
+<!-- Breadcrumb -->
+<ol class="breadcrumb m-b-0">
+    <li><a href="#/">Home</a></li>
+    <li><a href="#/takeaway">Take Away</a></li>
+    <li class="active">Order</li>
+</ol>
+
+<div class="container-fluid" ng-init="getAll();getPrintDetails();">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Take Away</strong>
+                        <small>Form</small> 
+                    </div>
+
+                      <div class="card-block"> 
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                              <div class="col-lg-2" ng-repeat="category in categoryList | filter : category"><br>
+                                 <button ng-click="getPro(category);" id="{{category.ctm_id}}" style="border-radius: 5px;" class="btn form-control">
+                                    <img ng-if="category.ctm_type == 'Starters'" id="t2" height="80" width="80" style="border-radius: 5px;" src="resources/assets/img/starter.png">
+                                    <img ng-if="category.ctm_type == 'Chineese-Starters'" id="t2" height="80" width="80" style="border-radius: 5px;" src="resources/assets/img/chineesestart.png">
+                                    <img ng-if="category.ctm_type == 'Veg-Meal'" id="t2" height="80" width="80" style="border-radius: 5px;" src="resources/assets/img/veg.png">
+                                    <img ng-if="category.ctm_type == 'Non-Veg-Meal'" id="t2" height="80" width="80" style="border-radius: 5px;" src="resources/assets/img/nonveg.png">
+                                    <img ng-if="category.ctm_type == 'Desserts'" id="t2" height="80" width="80" style="border-radius: 5px;" src="resources/assets/img/dessert.png">
+                                    <div>{{category.ctm_type}}</div>
+                                 </button>
+                              </div>
+                            </div>
+                                <!-- col-lg-12 -->
+                        </div>
+                              <!-- row -->
+                        <div ng-show="pro == 1">
+                          <div class="row">
+                            <div class="col-lg-6"><hr>
+                              <div class="col-lg-4" ng-repeat="product in productList | filter : product">
+                                <button ng-click="addOrder(product);" id="{{product.ctm_id}}" style="border-radius: 5px;" class="btn form-control">
+                                  <div><img ng-src="data:image/png;base64,{{product.pm_image}}" height="80" width="80" style="border-radius: 5px;"><p>{{product.pm_description}} {{product.pm_quantity}}</p></div>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-lg-6"><hr>
+                              <div class="col-lg-12">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th> 
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>Action</th> 
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="item in itemList track by $index">
+                                        <td>{{item.pm_description}} {{item.pm_quantity}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.pm_rate}}</td>
+                                        <td>{{item.total | number}}</td>
+                                        <td>
+                                          <button class="btn-danger form-control" id="om_min" ng-click="om_min($index)"><b>-</b></button></td>
+                                      </tr>
+                                    </tbody>
+                                    <tfoot>
+                                      <tr>
+                                        <td align="right" colspan="3">Total:</td>
+                                        <td>{{orderObj.om_total | number:2}}</td>
+                                        <td><button class="btn btn-primary" id="stop" ng-click="orderConfirm()">PRINT Order</button></td>
+                                      </tr>
+                                    </tfoot>
+                                </table>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                            <!-- row -->
+<!-- 
+                          <div class="row" >
+                            <div class="col-lg-12"><hr>
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Status</th>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th> 
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>Action</th> 
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-if="print.opm_status_type != 'cancel'" ng-repeat="print in printList track by $index">
+                                        <td>{{print.opm_status_type}}</td>
+                                        <td>{{print.pm_description}} {{print.pm_quantity}}</td>
+                                        <td><input type="number" ng-model="print.opm_quantity" min="1" ng-change="orderchange()" /></td>
+                                        <td>{{print.opm_rate}}</td>
+                                        <td>{{print.opm_quantity * print.opm_rate | number:2}}</td>
+                                        <td ng-if="print.opm_status_type == 'pending'">
+                                          <button class="btn-danger form-control" id="om_status" ng-click="om_status($index)" style="width: 40%; float: left;">Cancel</button>
+                                          <button class="btn-success form-control" id="om_update" ng-click="om_update($index)" style="width: 40%; float: right;">Update</button>
+                                        </td>
+                                        <td ng-if="print.opm_status_type == 'update'">
+                                          <button class="btn-danger form-control" id="om_status" ng-click="om_status($index)" style="width: 40%; float: left;">Cancel</button>
+                                          <button class="btn-success form-control" id="om_update" ng-click="om_update($index)" style="width: 40%; float: right;">Update</button>
+                                        </td>
+                                        <td ng-if="print.opm_status_type == 'completed'"></td>
+                                      </tr>
+                                    </tbody>
+                                    <tfoot>
+                                      <tr>
+                                        <td align="right" colspan="4">Total:</td>
+                                        <td>{{orderObj.total_amount | number :2}}</td>
+                                        <td><button class="btn btn-primary">PRINT</button></td>
+                                      </tr>
+                                    </tfoot>
+                                </table>
+                              </div>
+                          </div> -->
+                            <!-- row -->
+ 
+                      </div>
+                        <!-- /card block-->
+                    <div class="card-footer">
+                    </div>                   
+
+         </div>
+          <!-- /.card  -->
+      </div>
+        <!-- /col-lg-12 -->
+
+    </div>
+  </div>
+</div>             
