@@ -1,0 +1,68 @@
+<div class="pcoded-content" ng-init="getPermission();">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                          <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">User Management</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Add Roles</a>
+                                </li>
+                            </ul>
+                            <h3>Add New Roles</h3>
+                            <hr>
+                          </div>
+                          <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <label>Role Name</label>
+                                    <input type="text"
+                                          id="rm_name"
+                                          ng-model="role.rm_name"
+                                          class="form-control">
+                                  </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Role Description</label>
+                                        <textarea type="text" id="rm_description" class="form-control" ng-model="role.rm_description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <td class="col-sm-4" style="border: 1px solid #ccc; text-align: center;">Modules</td>
+                                  <td class="col-sm-6" style="border: 1px solid #ccc; text-align: center;">Permission</td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr ng-repeat="permission in permissionList">
+                                  <td>{{permission.pm_name}}</td>
+                                 <td class="table-responsive"><input type="checkbox"  ng-model='permission.pm_add' ng-change="checkstatus()"> Add <input type="checkbox"  ng-model='permission.pm_edit' ng-change="checkstatus()"> Update <input type="checkbox"  ng-model='permission.pm_delete' ng-change="checkstatus()"> Delete <input type="checkbox"  ng-model='permission.pm_list' ng-change="checkstatus()">List</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <br>
+                              <div class="row">
+                                  <div class="col-sm-4">
+                                      <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/role'" id="btncancel">Back</button>
+                                      <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="addRole()">SAVE</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="pcoded-content" ng-init='getUser(); preventPaste();'>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">User Management</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#!">Edit User</a>
+                                </li>
+                            </ul>
+                            <h3>Edit User</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                  <label>Employee Name</label>
+                                  <input type="text"
+                                        id="um_emp_id"
+                                        ng-model="user.um_emp_id"
+                                        class="form-control" disabled>
+                                </div>
+                                  <div class="col-lg-6">
+                                    <div class="form-group">
+                                      <label>Username</label>
+                                      <input type="text" id="um_user_name" class="form-control" ng-model="user.um_user_name" disabled/>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" id="um_user_password" class="form-control" ng-model="user.um_user_password"  />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input type="password" id="um_confirm_password" class="form-control" ng-model="user.um_confirm_password" />
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Assign Roles</label>
+                                        <input type="text" id="um_rm_id" class="form-control" ng-model="user.um_rm_id"  typeahead="state as state.rm_name for state in getrole($viewValue)"/>
+                                    </div>
+                                </div>
+                                <br>  
+                              </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                  <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/user'" id="btncancel">Back</button>
+                                  <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateUser()">SAVE</button>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -240,35 +240,35 @@
                               <li class="pcoded-hasmenu">
                                   <a href="javascript:void(0)" class="waves-effect waves-dark">
                                       <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee</span>
+                                      <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User</span>
                                       <span class="pcoded-mcaret"></span>
                                   </a>
                                   <ul class="pcoded-submenu">
-                                      <li class=" ">
-                                          <a href="accordion.html" class="waves-effect waves-dark">
+                                      <li class="">
+                                          <a href="#/user/add" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Accordion</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">user add</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
-                                          <a href="breadcrumb.html" class="waves-effect waves-dark">
+                                          <a href="#/user" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Breadcrumbs</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">user list</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
-                                          <a href="button.html" class="waves-effect waves-dark">
+                                          <a href="#/role/add" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Button</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">role add</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
                                       <li class=" ">
-                                          <a href="tabs.html" class="waves-effect waves-dark">
+                                          <a href="#/role" class="waves-effect waves-dark">
                                               <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabs</span>
+                                              <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">role list</span>
                                               <span class="pcoded-mcaret"></span>
                                           </a>
                                       </li>
@@ -503,6 +503,7 @@
     <script type="text/javascript" src="resources/lib/fileupload/angular-file-upload.min.js"></script>
 
     <script type="text/javascript" src="resources/lib/ocLazyLoad.js"></script>
+    <script type="text/javascript" src="resources/lib/bootbox.min.js"></script>
         <script type="text/javascript" src="resources/assets/js/libs/toastr.min.js"></script>
     <!-- <script type="text/javascript" src="assets/pages/widget/excanvas.js "></script> -->
     <!-- waves js -->
@@ -539,6 +540,16 @@
 
         <!-- admin -->
         <script src="modules/admin/config.js"></script>
+
+
+        <!-- user -->
+        <script src="modules/user/config.js"></script>
+
+
+        <!-- role -->
+        <script src="modules/role/config.js"></script>
+
+        
 </body>
 
 </html>

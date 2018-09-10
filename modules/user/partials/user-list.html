@@ -1,0 +1,177 @@
+<div class="pcoded-content" ng-init="getAll();">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card" ng-show="loading1==1">
+                      	<div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">User Management</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">User List</a>
+                                </li>
+                            </ul>
+                            <h3>User List</h3>
+                            <hr>
+                      	</div>
+                      	<div class="card-block">
+                            <div class="row">
+                              <div class="col-lg-11">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by username, role, employee name.. "/><br>
+                              </div>
+                              <div class="col-lg-1">
+                                <a class="btn btn-outline btn-info" href="#/user/add">Add</a>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <table class="table table-bordered table-striped">
+              							        <thead>
+          						                <tr>
+        						                    <th>Username</th>
+                  											<th>Name</th>
+                  											<th>Address</th>
+                  											<th>Mobile</th>
+                  											<th>Role</th>
+                  											<th>Action</th>
+          						                </tr>
+            						            </thead>
+            						            <tbody>
+          						                <tr ng-repeat="user in filteredTodos | filter : user">
+        						                    <td>{{user.username}}</td>
+                  											<td>{{user.emp_name}}</td>
+                  											<td>{{user.emp_address}}</td>
+                  											<td>{{user.emp_mobile}}</td>
+                  											<td>{{user.rm_name}}</td>
+                  														
+                  											<td>
+                  												<a href="#/user/edit/{{user.um_id}}"><i class="fa fa-pencil"></i></a>
+                  												<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteUser(user.um_id)"></i>
+                  											</td>
+      						                    </tr>
+          						              </tbody>
+            						      	</table>
+    							              <br>
+          					            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{userListcount}} User's</span>
+              							    <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
+              							          style="float: right;margin-left: 60%;">
+              							      <pagination
+              							              ng-model="currentPage"
+              							              total-items="userListcount"
+              							              max-size="maxSize"
+              							              boundary-links="true" data-num-pages="noOfPages"
+              							              items-per-page="numPerPage">
+              							      </pagination>
+              						    	</span>
+                            </div>
+             	  	      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="view-details">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">User Details</h4>
+      </div>
+      <div class="modal-body">
+      	<table class="table">
+			<tr>
+	          <td>
+	          	<div class="input-group date">
+	                <div class="input-group-addon">
+	                    <i class="fa fa-calendar"></i>
+	                </div>
+	                <input type="text" class="form-control pull-right" id="user-datepicker-from" placeholder="From Date">
+                </div>
+              </td>
+              <td>
+	          	<div class="input-group date">
+	                <div class="input-group-addon">
+	                    <i class="fa fa-calendar"></i>
+	                </div>
+	                <input type="text" class="form-control pull-right" id="user-datepicker-to" placeholder="To Date">
+                </div>
+              </td>
+	          <td><button type="button" class="btn" id="filter-user-btn" ng-click="filter()">Filter</button></td>
+	          <td><button type="button" class="btn" id="reset-user-btn" ng-click="reset()">Reset</button></td>
+              
+	      	</tr>
+	    </table>
+        <table class="table">
+    		<tr>
+    			<td>Name: <strong>{{venname}}</strong></td>
+    			<td>Number: <strong>{{venno}}</strong></td>
+    			<td>Address: <strong>{{venadd}}</strong></td>
+    			<td>Credit: <strong>{{venbal}}</strong></td>
+    			<td>Debit: <strong>{{vendebit}}</strong></td>
+    		</tr>
+    	</table>
+    	<table class="table" border="1">
+			<thead>
+			<tr>
+				<th>Type</th>
+				<th>Invoice</th>
+				<th>Date</th>
+				<th>Debit</th>
+				<th>Credit</th>
+				<th>DR/CR</th>
+				<th>Balance</th>
+			</tr>
+			</thead>
+			<tbody id="content">
+			<tr ng-repeat="purchaseDetails in categoryList | filter : purchaseDetails">
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.type}}</td>
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.invoice}}</td>
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.date | date : 'mediumDate'}}</td>
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.debit}}</td>
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.credit}}</td>
+				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.drcr}}</td>
+				<td style="padding:6px; border-style: none none solid none; border-width:1px;">{{purchaseDetails.bal}}</td>
+			</tr>
+			</tbody>
+		</table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" id="del" class="btn btn-primary" ng-click="printDetails();">Print</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal
