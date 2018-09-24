@@ -136,13 +136,13 @@ $scope.filteredTodos = [];
 
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
-  $scope.getpermission=function(){
-      if(localStorage.getItem('chicken_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+  // $scope.getpermission=function(){
+  //     if(localStorage.getItem('chicken_user_permission') == 0){
+  //       alert('You are not authorized');
+  //       window.location.href='#/';
+  //     }
+  //   };
+  //   $scope.getpermission();
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -239,7 +239,23 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
     };
 
     $scope.deleteRole = function (rm_id) {
-      $scope.rm_id=rm_id;
+      if(localStorage.getItem('chicken_roledelete_permission') == 0){
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">You Are Not Authorized</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        $('#trash').removeAttr('data-target');
+
+        $('#trash').removeAttr('data-toggle');
+      }
+      else
+      {
+         $scope.rm_id=rm_id;
+      }
     }  
 
     $scope.deleteConfirm = function () {
@@ -279,7 +295,7 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                 $scope.permissionList=[];
         $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/permission/view/'+$scope.filteredTodos[index].rm_id,
+          url: $rootScope.baseURL+'/role/view/'+$scope.filteredTodos[index].rm_id,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}

@@ -43,7 +43,7 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			 })
 		  	 .success(function(data, status, headers, config)
 		  	 {
-		  	 	if($scope.username == 'admin'){
+		  	 	
 
 			        $http({
 			          method: 'POST',
@@ -54,18 +54,44 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .success(function(deliverycount)
 			        {	
-			        	$scope.user = deliverycount[0].username;
-			        	$scope.firstname = deliverycount[0].first_name;
-			        	$scope.iconimage = deliverycount[0].icon_image;
+			        	deliverycount.forEach(function(val,key){
+			        		console.log(val);
+			        		$rootScope.pm_name = val.pm_name;
+			        		if(val.pm_name == 'user_master')
+			        		{
+			        			$scope.rpm_add = val.rpm_add;
+			        			$scope.rpm_edit = val.rpm_edit;
+			        			$scope.rpm_delete = val.rpm_delete;
+			        			$scope.rpm_list = val.rpm_list;
+			        			localStorage.setItem('chicken_add_permission',$scope.rpm_add);
+			        			localStorage.setItem('chicken_edit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('chicken_delete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('chicken_list_permission',$scope.rpm_list);
+			        		}
+			        		 if(val.pm_name == 'role_master'){
+			        			$scope.rpm_add = val.rpm_add;
+			        			$scope.rpm_edit = val.rpm_edit;
+			        			$scope.rpm_delete = val.rpm_delete;
+			        			$scope.rpm_list = val.rpm_list;
+			        			localStorage.setItem('chicken_roleadd_permission',$scope.rpm_add);
+			        			localStorage.setItem('chicken_roleedit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('chicken_roledelete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('chicken_rolelist_permission',$scope.rpm_list);
+			        		}
+
+			        	$scope.user = val.username;
+			        	$scope.firstname = val.first_name;
+			        	$scope.iconimage = val.icon_image;
 				  	 	localStorage.setItem('chicken_admin_username', $scope.user);
 				  	 	localStorage.setItem('chicken_admin_firstname', $scope.firstname);
 				  	 	localStorage.setItem('chicken_admin_iconimage', $scope.iconimage);
+			        	});
 				  	 	localStorage.setItem('chicken_admin_access_token', data.access_token);
 				        localStorage.setItem('chicken_admin_expires_in', data.expires_in);
 				        localStorage.setItem('chicken_admin_refresh_token', data.refresh_token);
 				        localStorage.setItem('chicken_admin_token_type', data.token_type);
-                $('#login').text("Login");
-                $('#login').removeAttr('disabled');
+		                $('#login').text("Login");
+		                $('#login').removeAttr('disabled');
 				         window.location = "/chicken/";
 			        })
 			        .error(function(data) 
@@ -82,28 +108,6 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        });
 
 		  	 		
-		  	 	}
-		  	 	else{
-			  	 	$scope.username = undefined;
-		  	 		$scope.password = undefined;
-		  	 		localStorage.removeItem('chicken_admin_access_token');
-			        localStorage.removeItem('chicken_admin_expires_in');
-			        localStorage.removeItem('chicken_admin_refresh_token');
-			        localStorage.removeItem('chicken_admin_token_type');
-			  	 	localStorage.removeItem('chicken_admin_username');
-			  	 	localStorage.removeItem('chicken_admin_firstname');
-			  	 	localStorage.removeItem('chicken_admin_iconimage');
-			        localStorage.clear();
-			        var dialog = bootbox.dialog({
-		            message: '<p class="text-center">You Are Not Right User To Login!</p>',
-		                closeButton: false
-		            });
-		            setTimeout(function(){
-                $('#login').text("Login");
-                $('#login').removeAttr('disabled');
-		                dialog.modal('hide'); 
-		            }, 2000); 
-		  	 	}
 		  	 })
 		  	 .error(function(data, status, headers, config)
 		  	 {

@@ -6,19 +6,26 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	$scope.roleId = $routeParams.roleId;
   $scope.apiURL = $rootScope.baseURL+'/role/edit/'+$scope.roleId;
   
-$scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
+$scope.getrolepermission=function(){
+      if(localStorage.getItem('chicken_roleedit_permission') == 0){
+       var dialog = bootbox.dialog({
+            message: '<p class="text-center">You Are Not Authorized</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+            window.history.back();
       }
     };
-    $scope.getpermission();
+    $scope.getrolepermission();
   $scope.getrole = function () {
 	     $http({
 	      method: 'GET',
 	      url: $rootScope.baseURL+'/role/'+$scope.roleId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
 	    })
 	    .success(function(roleobj)
 	    {
@@ -37,14 +44,14 @@ $scope.getpermission=function(){
             }, 1500);            
 	    });
 	};
-
+    $scope.getrole();
     $scope.getPermission = function(){
         $http({
           method: 'GET',
           url: $rootScope.baseURL+'/role/permission/'+$scope.roleId,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
         })
         .success(function(obj)
         {
@@ -62,7 +69,7 @@ $scope.getpermission=function(){
                     }
                     $scope.permissionList.push(value);
                 });
-
+                console.log($scope.permissionList);
         })
         .error(function(data) 
         {   
@@ -77,35 +84,44 @@ $scope.getpermission=function(){
     };
     $scope.getPermission();
 
-	$scope.checkstatus = function() {
+/*	$scope.checkstatus = function() {
         $scope.permissionList.forEach(function(value, key){
             if (value.rpm_add == true){
-                value.pm_add1=1;
+                value.pm_add=1;
             }
             else{
-                value.pm_add1=0;
+                if(value.rpm_add == false){
+
+                    value.pm_add=0;
+                }
             }
             if (value.rpm_edit == true){
-                value.pm_edit1=1;
+                value.pm_edit=1;
             }
             else{
-                value.pm_edit1=0;
+                if(value.rpm_edit == false){
+                value.pm_edit=0; 
+                }
             }
 
             if (value.rpm_delete == true){
-                value.pm_delete1=1;
+                value.pm_delete=1;
             }
             else{
-                value.pm_delete1=0;
+                if(value.rpm_delete == false){
+                value.pm_delete=0; 
+                }
             }
             if (value.rpm_list == true){
-                value.pm_list1=1;
+                value.pm_list=1;
             }
             else{
-                value.pm_list1=0;
+                if(value.rpm_list == false){
+                value.pm_list=0; 
+                }
             }
         });
-    };
+    };*/
 
 
   $scope.updateRole = function () {
@@ -138,7 +154,7 @@ $scope.getpermission=function(){
                     role:$scope.role,
                     permission:$scope.permissionList
                 }
-
+                console.log($scope.obj);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 		    $http({
@@ -146,7 +162,7 @@ $scope.getpermission=function(){
 		      url: $scope.apiURL,
 		      data: $scope.obj,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {

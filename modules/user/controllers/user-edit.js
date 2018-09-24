@@ -16,9 +16,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 }
 
 $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
+      if(localStorage.getItem('chicken_edit_permission') == 0){
         alert('You are not authorized');
-        window.location.href='#/';
+        window.history.back();
       }
     };
     $scope.getpermission();
@@ -28,7 +28,7 @@ $scope.getpermission=function(){
 	      method: 'GET',
 	      url: $rootScope.baseURL+'/userm/'+$scope.usermId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
 	    })
 	    .success(function(userobj)
 	    {
@@ -127,7 +127,7 @@ $scope.getpermission=function(){
 		      url: $scope.apiURL,
 		      data: $scope.user,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {

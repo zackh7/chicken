@@ -12,7 +12,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
           url: $rootScope.baseURL+'/role',
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
         })
         .success(function(obj)
         {
@@ -106,7 +106,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                   url: $scope.apiURL,
                   data: $scope.obj,
                   headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                          'Authorization' :'Bearer '+localStorage.getItem("chicken_admin_access_token")}
                 })
                 .success(function(roles)
                 {
